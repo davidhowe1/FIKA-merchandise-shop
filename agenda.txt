@@ -1,0 +1,343 @@
+
+CHECKOUT FUNCTIONALITY:
+
+Make a checkout page and have it update with a cart row when the use clicks
+on the add to cart button.
+
+The cart row need to include the image, price, quantity (input element),
+and the remove button.
+
+The remove button needs to remove the corresponding row from the cart.
+
+add a clear cart button that removes all rows from the cart and displays a 
+"Your cart is empty" message in place of the cart items.
+
+The checkout page also needs to have a section that totals the number of items,
+the total price of all the items in the cart and the delivery cost must be 
+rendered in **.99 (2 decimal places)
+
+
+
+HTML:
+
+<div class="detailed-merch-information">
+
+                    <div class="close-btn-vertical">
+                        <div class="button-wrapper">
+                            <li id="bar"></li>
+                            <li id="bar"></li>
+                            <li id="bar"></li>
+                        </div>
+                    </div>
+
+                    <div class="detailed-picture-wrapper">
+                        <img src="pictures\fika1-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>FIKA Coffe Cup</h2>
+                        <p>FIKA official coffee cups. Complete with a message of the day, 
+                            as seen on the famous blackboard outside the cafe. 
+                        </p>
+                        <button id="add-to-cart-btn">Add To Cart</button>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+
+                    <div class="close-btn-horizontal">
+                        <div class="button-wrapper">
+                            <li id="bar"></li>
+                            <li id="bar"></li>
+                            <li id="bar"></li>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika1-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Fika Coffee Cup</h2>
+                        <p>Get a genuine Fika coffee cup</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+
+                    
+                </div>
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika2-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Pastrami Sandwich</h2>
+                        <p>Get a genuine fika coffee cup, here today for only 2.99</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+
+                </div>
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika3-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Fika Coffee Cup</h2>
+                        <p>Get a genuine Fika coffee cup</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+                    
+                </div>
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika1-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Fika Coffee Cup</h2>
+                        <p>Get a genuine Fika coffee cup</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+                    
+                </div>
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika2-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Fika Coffee Cup</h2>
+                        <p>Get a genuine Fika coffee cup</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+                    
+                </div>
+
+                <div class="merch-card">
+                    <div class="picture-wrapper">
+                        <img src="pictures\fika3-square.jpg">
+                    </div>
+
+                    <div class="text-wrapper">
+                        <h2>Fika Coffee Cup</h2>
+                        <p>Get a genuine Fika coffee cup</p>
+                        <button id="buy-btn">Buy Now</button>
+                    </div>
+                    
+                </div>
+
+
+
+
+
+
+
+                JAVASCRIPT:
+
+                const imgs = [
+    "pictures/fika1-square.jpg",
+    "pictures/fika2-square.jpg",
+    "pictures/fika3-square.jpg",
+    "pictures/fika3-square.jpg",
+    "pictures/fika1-square.jpg",
+    "pictures/fika2-square.jpg",
+    "pictures/fika3-square.jpg"
+]
+
+const merchCard = document.getElementById('content')
+
+function renderMerchImages() {
+    for (let i = 0; i < imgs.length; i++) {
+    merchCard.innerHTML += `<div class="merch-card">
+    <div class="picture-wrapper">
+        <img src="${imgs[i]}">
+    </div>
+    
+    <div class="text-wrapper">
+        <button id="buy-btn">Buy Now</button>
+    </div>`
+    }
+}
+
+renderMerchImages()
+
+const titles = [
+    "Fika Coffee Cup",
+    "Pastrami Sandwich",
+    "Blondies"
+]
+
+const title = document.getElementsByClassName(`text-wrapper`)
+
+function renderMerchTitles() {
+    for (let i = 0; i < titles.length; i++) {
+    title.innerHTML += `<h2>"${titles[i]}"</h2>`
+    }
+}
+
+renderMerchTitles()
+
+
+ON CLICK --> RENDER LARGER CARD CONTAINING DETAILS
+
+
+// DETAILED VIEW JAVASCRIPT
+
+/* const merchDetailed = document.querySelector(".main-content")
+
+function displayDetailedView([tag,img,title,description, detailedView,detailed]) {
+    let code = `
+        <div id="${detailedView}" class="detailed-merch-information">
+
+        <div class="close-btn-vertical">
+            <div class="vertical-button-wrapper">
+                <li id="bar"></li>
+                <li id="bar"></li>
+                <li id="bar"></li>
+            </div>
+        </div>
+
+        <div class="detailed-picture-wrapper">
+            <img src="${img}">
+        </div>
+
+        <div class="text-wrapper">
+            <h2>${title}</h2>
+            <p>${detailed} 
+            </p>
+            <button id="add-to-cart-btn">Add To Cart</button>
+            <button id="buy-btn">Buy Now</button>
+        </div>
+
+        <div class="close-btn-horizontal">
+            <div onclick="closeDetailedView()" class="horizontal-button-wrapper">
+                <li id="bar"></li>
+                <li id="bar"></li>
+                <li id="bar"></li>
+            </div>
+        </div>
+        
+</div>`
+
+    merch.innerHTML = code;
+}
+
+let merchCard1 = document.getElementById("1");
+let merchCard2 = document.getElementById("2");
+let merchCard3 = document.getElementById("3");
+let merchCard4 = document.getElementById("4");
+let merchCard5 = document.getElementById("5");
+let merchCard6 = document.getElementById("6");
+
+merchCard1.addEventListener("click", function() {
+    displayDetailedView(merch1)
+})
+
+merchCard2.addEventListener("click", function() {
+    displayDetailedView(merch2)
+})
+
+merchCard3.addEventListener("click", function() {
+    displayDetailedView(merch3)
+})
+
+merchCard4.addEventListener("click", function() {
+    displayDetailedView(merch4)
+})
+
+merchCard5.addEventListener("click", function() {
+    displayDetailedView(merch5)
+})
+
+merchCard6.addEventListener("click", function() {
+    displayDetailedView(merch6)
+}) */
+
+
+CART HTML
+
+<div class="cart-row">
+    <img class="image" src="pictures/fika2-square.jpg"></img>
+    <div class="price"><p>£7.99</p></div>
+    <input class="quantity" type="number" value="1">
+    <button class="remove-item">Remove</button>
+</div>
+
+
+
+
+
+                        <div class="two-collumn-section">
+
+                        <div id="left-div">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2379.1745444380626!2d-2.9138797651775064!3d53.3938175159839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487b21fd432784bf%3A0x1a231b95e7294bcc!2sFika!5e0!3m2!1sen!2suk!4v1656761298085!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+    
+                        <div id="right-div">
+                            <h1>What is Fika?</h1>
+                            <p> Fika is a Swedish inspired cafe based in Woolton, Liverpool.
+                                Fika is swedish custom where people take time out of their 
+                                day to relax, eat cake, have drinks and spend time with others, 
+                                usually in a relaxing environment.
+                            </p>
+    
+                            <p> Fika Liverpool has the same concept. Come and 
+                                meet the Fika team and enjoy some of the delicious snacks and drinks 
+                                on offer. 
+                            </p>
+    
+                            <button class="link" id="buy-btn"><a class="link" href="contact.html">Visit Fika</a></button>
+                        </div>
+    
+                    </div>
+
+
+
+                    function removeCartItem(event) {
+    let buttonClicked = document.getElementsByClassName('remove-item')
+    for (let i = 0; i < buttonClicked.length; i++) {
+    buttonClicked[i].addEventListener('click', fadeOutCartRow)
+    removeItem()
+    updateCartTotal()
+}}
+
+function removeItem(event) {
+    let cartRow = document.getElementsByClassName('cart-row')
+    letButtonClicked = event.target
+    buttonClicked.remove()
+}
+
+
+<div class="hero-image">
+                    <h1>Fika</h1>
+                    <h2>[/' fi : ka /] [ noun ]</h2>
+                    <p>A moment to slow down and appreciate the good things in
+                        life, usually accampanied by sweet baked goods and coffee.
+                    </p>
+                </div>
+
+
+                
+.hero-image {
+    display: flex;
+    opacity: calc(100%);
+    flex-direction: column;
+    background-image: linear-gradient(to right, #dddbd7, #f1f0ee);
+    height: 700px;
+    width: 450px;    
+    padding: 50px;
+    justify-content: center;
+    text-align: left;
+    border: 10px solid #252525;
+    font-family: 'Noto sans', serif;
+    margin-bottom: 40px;
+    box-shadow: inset 10px 10px rgba(0, 0, 0, 0.19);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
