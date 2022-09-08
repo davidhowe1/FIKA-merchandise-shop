@@ -402,8 +402,8 @@ input.quantity {
 
 button.remove-item {
     padding: 0px;
-    width: 100%;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     text-decoration: none;
     border: none;
     color: #fff;
@@ -1077,7 +1077,7 @@ li#bar:nth-child(3) {
         background-color: #1b1b1b;
         color: #fff;
         border: none;
-        padding: 8px 37.5px;
+        padding: 10px 37.5px;
         font-family: Noto sans;
         font-weight: 300;
         font-size: 0.9rem;
@@ -1187,8 +1187,8 @@ li#bar:nth-child(3) {
     }
 
     button.remove-item {
-        height: 30px;
-        width: 100px;
+        height: 40px;
+        width: 70px;
     }
 
     /* Contact Styles */
@@ -1608,7 +1608,7 @@ i {
         display: flex;
         flex-direction: column;
         padding: 0px 10px 0px 10px;
-        height: 146px;
+        height: 155px;
         width: 50%;
         justify-content: space-between;
     }
