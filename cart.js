@@ -4,9 +4,118 @@ if (document.readyState == 'loading') {
     ready()
 }
 
-function ready() {
+let merchCards = [
 
-let cart = document.getElementById('cart-row-container')
+    {
+     id: "fikacoffeecup",
+     pictureUrl: "pictures/fika1-square.jpg",
+     alt: "FIKA Coffee Cup",
+     title: "Fika Coffee Cup",
+     description: "FIKA official coffee cups. Complete with a message of the day.",
+     price: 3,
+     inCart: 0
+    },
+ 
+    {
+     id: "blondies",
+     pictureUrl: "pictures/fika2-square.jpg",
+     alt: "Closeup of FIKA Blondies",
+     title: "Blondies",
+     description: "Famous Fika Blondies. Indulge in these super fudgy delights!",
+     price: 9,
+     inCart: 0
+    },
+ 
+    {
+     id: "pastramisandwich",
+     pictureUrl: "pictures/fika3-square.jpg",
+     alt: "Close up of FIKA Pastrami Sandwich",
+     title: "Pastrami Sandwich",
+     description: "Classic Pastrami, straight out of the NY deli, brought to you here in Liverpool.",
+     price: 6,
+     inCart: 0
+    },
+ 
+    {
+     id: "royalbrownies",
+     pictureUrl: "pictures/fika6.jpg",
+     alt: "Closeup of FIKA brownies",
+     title: "Royal Brownies",
+     description: "Celebrate the Jubilee this year with these caramel cornflake brownies!",
+     price: 6,
+     inCart: 0
+    },
+ 
+    {
+     id: "salamismorga",
+     pictureUrl: "pictures/fika7.jpg",
+     alt: "Closeup of FIKA Salami Smorga",
+     title: "Salami Smorga",
+     description: "Fresh salami and cheese smorga. An open sandwich and a simply gorgeous one at that",
+     price: 6,
+     inCart: 0
+    },
+ 
+    {
+     id: "fikaboard",
+     pictureUrl: "pictures/fika8.jpg",
+     alt: "Closeup of FIKA board",
+     title: "FIKA Board",
+     description: "The famous Fika Board. Normally found with a message of the day.",
+     price: 22,
+     inCart: 0
+    },
+ 
+    {
+     id: "fikacoffeecup",
+     pictureUrl: "pictures/fika1-square.jpg",
+     alt: "FIKA Coffee Cup",
+     title: "Fika Coffee Cup",
+     description: "FIKA official coffee cups. Complete with a message of the day.",
+     price: 3,
+     inCart: 0
+    },
+ 
+    {
+     id: "blondies",
+     pictureUrl: "pictures/fika2-square.jpg",
+     alt: "Closeup of FIKA Blondies",
+     title: "Blondies",
+     description: "Famous Fika Blondies. Indulge in these super fudgy delights!",
+     price: 9,
+     inCart: 0
+    },
+ ];
+ 
+ let htmlCode = ``;
+ 
+ merchCards.forEach(function(merchCardObjects) {
+     htmlCode = 
+     htmlCode + 
+     `
+     <div id="${merchCardObjects.id}" class="merch-card">
+         <div class="picture-wrapper"> 
+             <img class="merch-image" src="${merchCardObjects.pictureUrl}" alt="${merchCardObjects.alt}">
+         </div>
+ 
+         <div class="text-wrapper">
+             <h2 class="title" >${merchCardObjects.title}</h2>
+             <h3 class="price">£${merchCardObjects.price}</h3>
+             <p class="description" >${merchCardObjects.description}</p>
+ 
+             <button class="add-to-cart" id="buy-btn">Add to Cart</button>
+         </div>
+             
+     </div>
+     `
+ });
+ 
+ let merchCardsRendered = document.querySelector('.main-container')
+ merchCardsRendered.insertAdjacentHTML('beforeend', htmlCode)
+
+function ready() {
+    
+updateCartTotal()
 
 let addToCart = document.getElementsByClassName('add-to-cart')
 for (let i = 0; i < addToCart.length; i++) {
@@ -40,8 +149,20 @@ cartTotal.innerText = '0'
 
 function totalItems() {
     let cartRowContainer = document.querySelector('.cart-row-container')
+    let mobileCart = document.querySelector('#total')
     let total = cartRowContainer.children.length
-    cartTotal.innerText = total
+    localStorage.setItem('total-items', total)
+    let totalItems = localStorage.getItem('total-items')
+    mobileCart.textContent = totalItems
+}
+
+function onLoadCartContent() {
+    let totalItems = localStorage.getItem('total-items')
+    let mobileCart = document.querySelector('#total')
+
+    if (totalItems) {
+        mobileCart.textContent = totalItems
+    }
 }
 
 function purchaseClicked() {
@@ -57,15 +178,15 @@ function addToCartClicked(event) {
     let button = event.target
     let item = button.parentElement
     let image = button.parentElement.parentElement
+    let imageAlt = image.getElementsByClassName('merch-image')[0].alt
     let title = item.getElementsByClassName('title')[0].innerText
     let price = item.getElementsByClassName('price')[0].innerText
     let imageSrc = image.getElementsByClassName('merch-image')[0].src
-    addItemToCart(title, price, imageSrc)
+    addItemToCart(title, price, imageSrc, imageAlt)
     updateCartTotal()
-    totalItems()
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, imageAlt) {
     let cartRow = document.createElement('div')
     let cartItems = document.getElementsByClassName('cart-row-container')[0]
     cartItemNames = cartItems.getElementsByClassName('title')
@@ -77,7 +198,7 @@ function addItemToCart(title, price, imageSrc) {
     }
     let cartRowContents = `<div class="cart-row" id="cart-row">
                                 <div class="row-container">
-                                    <img class="image" src="${imageSrc}"></img>
+                                    <img class="image" src="${imageSrc}" alt="${imageAlt}"></img>
                                     <div class="title">${title}</div>
                                 </div>
                                 <div class="row-container">
@@ -98,7 +219,6 @@ function removeCartItem(event) {
     let buttonClicked = event.target
     buttonClicked.parentElement.parentElement.parentElement.remove()
     updateCartTotal()
-    totalItems()
 }
 
 function quantityChanged(event) {
@@ -136,5 +256,4 @@ function toggleCart() {
     let toggleButton = document.getElementById('cart-toggle-tab')
     toggleCart.classList.toggle('hide')
     toggleButton.classList.toggle('hide')
-
 }
