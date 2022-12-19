@@ -209,7 +209,6 @@ function showCartItems() {
     totalPrice = Math.round(totalPrice * 100) / 100
     total.textContent = "Grand Total: £" + totalPrice
 
-
     if ( cartItems && itemsContainer ) {
         itemsContainer.innerHTML = ''
         Object.values(cartItems).map(item => {
