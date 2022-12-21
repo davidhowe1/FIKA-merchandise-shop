@@ -1,3 +1,16 @@
+let sideNav = document.getElementById("side-nav");
+const menuToggle = document.querySelector('#mobile-menu')
+
+menuToggle.addEventListener('click', showMenu)
+
+function showMenu() {
+    sideNav.classList.toggle('active')
+}
+
+$('#content').hide().fadeIn('slow');
+$('#home').hide().fadeIn('slow');
+
+
 let merchCards = [
 
     {
@@ -109,11 +122,26 @@ let merchCards = [
 
 // Cart Code
 
-let cartToggle = document.querySelector('#cart-toggle-tab')
+const cartToggle = document.querySelectorAll('.cart-toggle-desktop')
+const desktopMenu = document.querySelector('.cart-items')
+const closeCartButton = document.querySelector('h2.close')
 
-cartToggle.addEventListener('click', toggleCart)
+for (let i = 0; i < cartToggle.length; i++) {
+    cartToggle[i].addEventListener('click', ()=> {
+        desktopMenu.classList.toggle('hide');
+        sideNav.classList.remove('active');
+    })
+}
 
-function toggleCart() {
+closeCartButton.addEventListener('click', ()=> {
+    desktopMenu.classList.add('hide');
+})
+
+let cartToggleMobile = document.querySelector('#cart-toggle-tab')
+
+cartToggleMobile.addEventListener('click', toggleCartMobile)
+
+function toggleCartMobile() {
     let toggleCart = document.getElementById('cart')
     let toggleButton = document.getElementById('cart-toggle-tab')
     toggleCart.classList.toggle('hide')
@@ -132,10 +160,12 @@ for (let i = 0; i < addToCart.length; i++) {
 
 function onLoadCartItems() {
     let mobileCart = document.querySelector('#total')
+    let desktopCart = document.querySelector('h2.total')
     let productNumbers = localStorage.getItem('cart-total')
 
     if (productNumbers) {
         mobileCart.textContent = productNumbers
+        desktopCart.textContent = productNumbers
     }
 }
 
@@ -144,17 +174,21 @@ function totalItems(item, action) {
     productNumbers = parseInt(productNumbers)
 
     let mobileCart = document.querySelector('#total')
+    let desktopCart = document.querySelector('h2.total')
     
     if ( action == "decrease" ) {
         localStorage.setItem('cart-total', productNumbers - 1)
         mobileCart.textContent = productNumbers - 1
+        desktopCart.textContent = productNumbers -1
 
     } else if ( productNumbers ) {
         localStorage.setItem('cart-total', productNumbers + 1)
         mobileCart.textContent = productNumbers + 1
+        desktopCart.textContent = productNumbers + 1
     } else {
         localStorage.setItem('cart-total', 1)
         mobileCart.textContent = 1
+        desktopCart.textContent = 1
     }
 
     setItems(item)
@@ -207,7 +241,7 @@ function showCartItems() {
     let total = document.querySelector('.grand-total')
     let totalPrice = localStorage.getItem('total')
     totalPrice = Math.round(totalPrice * 100) / 100
-    total.textContent = "Grand Total: £" + totalPrice
+    total.textContent = "Total: £" + totalPrice
 
     if ( cartItems && itemsContainer ) {
         itemsContainer.innerHTML = ''

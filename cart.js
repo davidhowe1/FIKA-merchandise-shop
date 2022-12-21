@@ -244,7 +244,7 @@ function updateCartTotal() {
     }
     
     total = Math.round(total * 100) / 100
-    let grandTotal = document.getElementsByClassName('grand-total')[0].innerText = "Grand Total: £" + total
+    let grandTotal = document.getElementsByClassName('grand-total')[0].innerText = "Total: £" + total
 }
 
 let cartToggle = document.querySelector('#cart-toggle-tab')
