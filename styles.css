@@ -420,6 +420,7 @@ p#cart-total {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    scrollbar-width: none;
     padding: 0px 15px 15px;
 }
 
